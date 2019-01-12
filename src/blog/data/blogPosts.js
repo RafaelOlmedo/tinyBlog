@@ -7,21 +7,21 @@ export const blogPosts = [
     {
         id: 1,
         title: 'Post title 1',
-        date: '12/01/2019 12:15',
+        date: '2019-01-25 12:15',
         tags: [ 'sports', 'variety' ],
         content: lorenText
     },
     {
         id: 2,
         title: 'Post title 2',
-        date: '09/01/2019 12:15',
+        date: '2019-01-05 12:15',
         tags: [ 'sports', 'news' ],
         content: lorenText
     },
     {
         id: 3,
         title: 'Post title 3',
-        date: '10/01/2019 12:15',
+        date: '2019-10-01 12:15',
         tags: [ 'news' ],
         content: lorenText
     }

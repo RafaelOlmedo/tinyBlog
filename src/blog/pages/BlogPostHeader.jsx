@@ -6,7 +6,9 @@ const BlogPostHeader = (props) => (
         <h3><p>{props.title}</p></h3>
 
         <p>
-            <span className="badge badge-secondary">{props.date}</span>
+            <span className="badge badge-secondary">
+                {new Date(props.date).toLocaleDateString('pr-BR')}
+            </span>
 
             {props.tags === undefined ? null : props.tags.map(tag => (
                 <span key={tag}>

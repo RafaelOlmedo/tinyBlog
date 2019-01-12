@@ -1,14 +1,19 @@
 import React from 'react'
 import BlogPostHeader from './BlogPostHeader';
+import {blogPosts} from '../data/blogPosts'
 
 const lorenText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ' +
     'Consequuntur, dolores vel temporibus excepturi illum, repellat ' +
     'aperiam repellendus deleniti debitis beatae cum ex nesciunt ' +
     'possimus voluptates voluptate! Dignissimos alias nobis adipisci? ';
 
-const BlogPostFull = (props) => {
+const BlogPostFull = ({match}) => {
 
-    if (props.post === null) {
+    let id = parseInt(match.params.id);
+    const post = blogPosts.find(post => post.id === id);
+    console.log(id)
+
+    if (post === undefined) {
         return (
             <div className="text-danger">
                 <h3>404 - No content </h3>
@@ -19,13 +24,13 @@ const BlogPostFull = (props) => {
     return (
 
         <div>
-            <BlogPostHeader {...props.post} />
+            <BlogPostHeader {...post} />
 
-            <p>{props.post.content}</p>
+            <p>{post.content}</p>
 
 
-            <a href={"/post/edit/" + props.post.id}>[edit]</a>
-            <a href={"/delete/" + props.post.id}>[delete]</a>
+            <a href={"/post/edit/" + post.id}>[edit]</a>
+            <a href={"/delete/" + post.id}>[delete]</a>
 
         </div>
     )
