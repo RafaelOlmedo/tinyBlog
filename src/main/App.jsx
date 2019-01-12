@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BlogIndex from '../blog/pages/indexPage'
 
 // class App extends Component {
 //    constructor(props) {
@@ -18,9 +19,11 @@ import React, { Component } from 'react'
 // }
 
 const App = (props) => (
-    <div>
+    <div className="container">
         <h1>{props.title}</h1>
         <h2 className="small">{props.subtitle}</h2>
+        <hr/>
+        <BlogIndex />,    
     </div>
 )
 
