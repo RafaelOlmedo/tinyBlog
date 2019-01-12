@@ -1,16 +1,15 @@
 import React from 'react'
 import BlogPostHeader from './BlogPostHeader';
-import {blogPosts} from '../data/blogPosts'
 
 const lorenText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ' +
     'Consequuntur, dolores vel temporibus excepturi illum, repellat ' +
     'aperiam repellendus deleniti debitis beatae cum ex nesciunt ' +
     'possimus voluptates voluptate! Dignissimos alias nobis adipisci? ';
 
-const BlogPostFull = ({match}) => {
+const BlogPostFull = (posts, {match}) => {
 
     let id = parseInt(match.params.id);
-    const post = blogPosts.find(post => post.id === id);
+    const post = posts.find(post => post.id === id);
     console.log(id)
 
     if (post === undefined) {
