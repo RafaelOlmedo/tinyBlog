@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
+import App from './main/App'
+
 import './assets/css/bootstrap.scss'
 import './assets/js/bootstrap'
 
 ReactDom.render(
-    <h1>Tiny Blog</h1>,
+    <App title="Tiny Blog" subtitle="My personal blog"/>,
     document.getElementById('root')
 )
