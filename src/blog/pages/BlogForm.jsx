@@ -1,4 +1,5 @@
 import React from 'react'
+import Textarea from '../components/Textarea';
 
 const BlogForm = (props) => (
     <div> {/* div do Form */}
@@ -29,7 +30,8 @@ const BlogForm = (props) => (
             </select>
         </div>
 
-        <div className="form-group">
+        <Textarea content={props.tempPost.content} onFieldChange={props.onFieldChange} />
+        {/* <div className="form-group">
             <label htmlFor="content">Content</label>
             <textarea name="content"
                 id="content"
@@ -39,7 +41,7 @@ const BlogForm = (props) => (
                 onChange={props.onFieldChange}>
             </textarea>
             <small>0 caracteres</small>
-        </div>
+        </div> */}
 
         <div>
             <button className="btn btn-primary"

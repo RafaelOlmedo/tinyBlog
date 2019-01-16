@@ -1,9 +1,6 @@
 import React from 'react'
 
 import BlogPost from './BlogPost'
-import BlogForm from './BlogForm'
-import BlogPostFull from './BlogPostFull'
-import { blogPosts } from '../data/blogPosts';
 
 const BlogIndex = (posts) => (
     <div>
