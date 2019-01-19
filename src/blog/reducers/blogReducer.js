@@ -15,13 +15,13 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
 
             let newPost = {
                 ...state.tempPost,
-                tags: [state.tempPost.tags],
+                tags: [...state.tempPost.tags.map(tag => (tag.value))],
                 date: new Date().toLocaleDateString('en-US'),
                 id: state.posts.length + 1
             }
        
             if (newPost.title !== undefined && newPost.title !== '' &&
-                newPost.tags !== undefined && newPost.tags !== '' &&
+                newPost.tags !== undefined && newPost.tags.length > 0 &&
                 newPost.content !== undefined && newPost.content !== '') {                
             
                     return {
