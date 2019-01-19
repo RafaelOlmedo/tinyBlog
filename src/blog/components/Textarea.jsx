@@ -10,7 +10,7 @@ const Textarea = (props) => (
 
     <div className="form-group">
         <label htmlFor="content">Content</label>
-        <textarea name="content"
+        <textarea name={props.name}
             id="content"
             className="form-control"
             rows="5"

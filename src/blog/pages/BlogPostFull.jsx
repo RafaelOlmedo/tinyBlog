@@ -1,14 +1,9 @@
 import React from 'react'
 import BlogPostHeader from './BlogPostHeader';
+import { connect } from 'react-redux';
 
-const lorenText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ' +
-    'Consequuntur, dolores vel temporibus excepturi illum, repellat ' +
-    'aperiam repellendus deleniti debitis beatae cum ex nesciunt ' +
-    'possimus voluptates voluptate! Dignissimos alias nobis adipisci? ';
+const BlogPostFull = ({id, posts}) => {
 
-const BlogPostFull = (posts, {match}) => {
-
-    let id = parseInt(match.params.id);
     const post = posts.find(post => post.id === id);
     console.log(id)
 
@@ -35,4 +30,15 @@ const BlogPostFull = (posts, {match}) => {
     )
 }
 
-export default BlogPostFull
+const mapStateToProps = (state, ownProps) => {
+    return {
+        posts: state.blog.posts,
+        ...ownProps
+    }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+
+// }
+
+export default connect(mapStateToProps)(BlogPostFull)
