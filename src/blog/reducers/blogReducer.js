@@ -1,7 +1,10 @@
 import { INITIAL_STATE, INITIAL_TEMP_STATE } from "../data/inititalState";
-import { SAVE_POST, FIELD_CHANGE, DELETE_POST } from "../actions/blogActions"
+import { SAVE_POST, FIELD_CHANGE, DELETE_POST, EDIT_POST } from "../actions/blogActions"
 
 export const blogReducer = (state = INITIAL_STATE, action) => {
+
+    let posts = [];
+
     switch (action.type) {
         case FIELD_CHANGE:
             return {
@@ -16,25 +19,45 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
             let newPost = {
                 ...state.tempPost,
                 tags: [...state.tempPost.tags.map(tag => (tag.value))],
-                date: new Date().toLocaleDateString('en-US'),
-                id: state.posts.length + 1
+                date: new Date().toLocaleDateString('en-US')
             }
 
             if (newPost.title !== undefined && newPost.title !== '' &&
                 newPost.tags !== undefined && newPost.tags.length > 0 &&
                 newPost.content !== undefined && newPost.content !== '') {
 
+                if(newPost.id === 0){
+                    const newId = 1 + state.posts.reduce(
+                        (p, post) => (p > newPost.id ? p : newPost.id), 0
+                    )
+
+                    posts = [...state.posts, { ...newPost, id: newId}]
+                }
+                else {
+                    posts = [...state.posts.map(postAtual => 
+                        postAtual.id === newPost.id ? { ...newPost} : { ...postAtual}
+                    )]
+                }
+
                 return {
                     ...state,
                     posts: [
-                        ...state.posts,
-                        newPost
+                        ...posts
                     ],
                     tempPost: { ...INITIAL_TEMP_STATE }
                 }
             }
 
             break;
+
+        case EDIT_POST:
+
+            return {
+                ...state,
+                tempPost: {
+                    ...action.payload
+                }
+            }            
 
         case DELETE_POST:
 
@@ -44,32 +67,23 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
 
 
             // let teste = state.posts.reduce(function (Acumulador, valorAtual) {
-            //     // console.log("===========================================================")
-            //     // console.log("Acumulador: " + Acumulador.id)
-            //     console.log(Acumulador)
+                
+            //     //console.log(Acumulador)
 
-            //     // console.log("Valor atual: " + valorAtual.id)
-            //     // console.log(valorAtual)
+            //     return [
+            //         ...Acumulador,
+            //         valorAtual
+            //     ]
 
-
-            //     // console.log("Indice: " + indice)
-            //     // console.log("===========================================================")
-
-            //     return {
-            //                 posts : [
-            //                     ...Acumulador,
-            //                     ...valorAtual
-            //                 ]
-            //             }   
             // }, []);
 
             // console.log(teste)
 
-        let teste = state.posts.filter( post => {
-            return post.id !== action.post;
-        })
+        // let teste = state.posts.filter( post => {
+        //     return post.id !== action.post;
+        // })
 
-        console.log(teste)
+        // console.log(teste)
 
         return {
             ...state,
@@ -81,7 +95,7 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
             tempPost: {...INITIAL_TEMP_STATE}
         }
 
-        return state;
+        // return state;
 
         default:
             return state;

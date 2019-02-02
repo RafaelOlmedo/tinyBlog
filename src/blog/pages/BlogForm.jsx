@@ -7,7 +7,7 @@ import { TAGS } from '../data/tags';
 
 const BlogForm = (props) => (
     <div> {/* div do Form */}
-        <h2><p>New post</p></h2>
+        <h2><p>{props.tempPost.id === 0 ? 'New' : 'Edit'} post</p></h2>
 
         <div className="form-group">
             <label htmlFor="title">Title</label>
@@ -27,7 +27,8 @@ const BlogForm = (props) => (
                 id="tags"
                 name="tags"
                 options={TAGS}
-                className="basic-multi-select"
+                className="ba
+                sic-multi-select"
                 value={props.tempPost.tags}
                 onChange={(value, obj) => props.onFieldChange(
                     {

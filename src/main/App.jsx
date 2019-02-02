@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom"
 import BlogForm from '../blog/pages/BlogForm';
 import BlogPostFull from '../blog/pages/BlogPostFull';
 import { blogPosts } from '../blog/data/blogPosts';
+//import BlogFormUpdate from '../blog/pages/BlogFormUpdate';
 
 class App extends Component {
     constructor(props) {
@@ -37,6 +38,14 @@ class App extends Component {
                     <Switch>
                         <Route exact path='/' component={BlogIndex} />
                         <Route exact path='/post/add' component={BlogForm} />
+                        <Route exact path='/post/edit' component={BlogForm} />
+
+                        {/* <Route exact path='/post/edit/:id' component={
+                            ({match}) => (
+                                <BlogFormUpdate
+                                    id={parseInt(match.params.id)} />
+                            ) 
+                        }/> */}
                         <Route path="/post/:id" component={
                             ({ match }) => (
                             <BlogPostFull 
