@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
 import App from './main/App'
+
+import multi from 'redux-multi'
 
 import './assets/css/bootstrap.scss'
 import './assets/js/bootstrap'
@@ -13,7 +15,7 @@ const reducers = combineReducers({
     blog: blogReducer
 })
 
-const store = createStore(reducers)
+const store = applyMiddleware(multi)(createStore)(reducers)
 
 ReactDom.render(
     <Provider store={store}>

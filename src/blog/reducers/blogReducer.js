@@ -16,26 +16,34 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
             };
         case SAVE_POST:
 
+            console.log('SAVE_POST')
+
             let newPost = {
                 ...state.tempPost,
-                tags: [...state.tempPost.tags.map(tag => (tag.value))],
-                date: new Date().toLocaleDateString('en-US')
+                tags: [...state.tempPost.tags.map(tag => (tag.value))]
             }
+
+            console.log(newPost);
 
             if (newPost.title !== undefined && newPost.title !== '' &&
                 newPost.tags !== undefined && newPost.tags.length > 0 &&
                 newPost.content !== undefined && newPost.content !== '') {
 
-                if(newPost.id === 0){
+                console.log('validou')
+                if (newPost.id === 0) {
                     const newId = 1 + state.posts.reduce(
                         (p, post) => (p > newPost.id ? p : newPost.id), 0
                     )
 
-                    posts = [...state.posts, { ...newPost, id: newId}]
+                    posts = [...state.posts, {
+                        ...newPost,
+                        id: newId,
+                        date: new Date().toLocaleString('en-US')
+                    }]
                 }
                 else {
-                    posts = [...state.posts.map(postAtual => 
-                        postAtual.id === newPost.id ? { ...newPost} : { ...postAtual}
+                    posts = [...state.posts.map(postAtual =>
+                        postAtual.id === newPost.id ? { ...newPost } : { ...postAtual }
                     )]
                 }
 
@@ -47,27 +55,42 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
                     tempPost: { ...INITIAL_TEMP_STATE }
                 }
             }
+            else {
+                alert('Preencha todas as informações antes de salvar.')
+
+                return state;
+            }
 
             break;
 
         case EDIT_POST:
 
+            console.log("EDIT");
+            console.log(state);
+
+            const tagsWithLabel = action.payload.tags.
+                map(tag => ({
+                    value: tag,
+                    label: state.tags.find(t => (t.value === tag)).label
+                }))
+
             return {
                 ...state,
                 tempPost: {
-                    ...action.payload
+                    ...action.payload,
+                    tags: tagsWithLabel
                 }
-            }            
+            }
 
         case DELETE_POST:
 
-            console.log(action)
+            console.log(action.payload.id)
             console.log(state)
             console.log(state.posts)
 
 
             // let teste = state.posts.reduce(function (Acumulador, valorAtual) {
-                
+
             //     //console.log(Acumulador)
 
             //     return [
@@ -79,21 +102,21 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
 
             // console.log(teste)
 
-        // let teste = state.posts.filter( post => {
-        //     return post.id !== action.post;
-        // })
+            // let teste = state.posts.filter( post => {
+            //     return post.id !== action.post;
+            // })
 
-        // console.log(teste)
+            // console.log(teste)
 
-        return {
-            ...state,
-            posts: [
-                ...state.posts.filter( post => {
-                    return post.id !== action.post;
-                })
-            ],
-            tempPost: {...INITIAL_TEMP_STATE}
-        }
+            return {
+                ...state,
+                posts: [
+                    ...state.posts.filter(post => {
+                        return post.id !== action.payload.id;
+                    })
+                ],
+                tempPost: { ...INITIAL_TEMP_STATE }
+            }
 
         // return state;
 

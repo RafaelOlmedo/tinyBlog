@@ -63,15 +63,17 @@ const BlogForm = (props) => (
             <button className="btn btn-primary"
                 onClick={props.onSaveClick}>Save</button>
             {' '}
-            <button className="btn btn-secondary">Cancel</button>
+            <button className="btn btn-secondary" onClick={() => {props.history.push('/')}}>Cancel</button>
 
         </div>
     </div>
 )
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  
     return {
-        tempPost: state.blog.tempPost
+        tempPost: state.blog.tempPost,
+        ...ownProps
     }
 }
 

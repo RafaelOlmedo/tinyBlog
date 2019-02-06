@@ -47,9 +47,11 @@ class App extends Component {
                             ) 
                         }/> */}
                         <Route path="/post/:id" component={
-                            ({ match }) => (
+                            ({ match, history }) => (
                             <BlogPostFull 
-                                id={parseInt(match.params.id)} /> 
+                                id={parseInt(match.params.id)} 
+                                history={history}
+                                /> 
                             )
                         } />
                         <Route component={() => (<div>404 - Not Found</div>)} />
