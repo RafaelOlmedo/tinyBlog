@@ -23,7 +23,7 @@ export const savePost = (tempPost) => {
             newPost.content !== undefined && newPost.content !== '') {
 
             console.log('validou')
-            if (tempPost._id ===  0) {
+            if (tempPost._id === 0) {
 
                 axios
                     .post(`${URL}/posts`, { ...newPost })
@@ -73,16 +73,18 @@ export const savePost = (tempPost) => {
 //     }
 // }
 
-const getAllPosts = () => {
+const getAllPosts = (history = null) => {
     return dispatch => {
         axios.get(`${URL}/posts`)
             .then(resp => {
-                return dispatch({
-                    type: SAVE_POST,
-                    payload: {
-                        posts: [...resp.data]
-                    }
-                })
+                return dispatch([
+                    {
+                        type: SAVE_POST,
+                        payload: {
+                            posts: [...resp.data]
+                        }
+                    }, history ? history.push('/') : null
+                ])
             })
             .catch(error => {
                 return dispatch({
@@ -103,10 +105,19 @@ export const fieldChange = (event) => ({
     payload: event.target
 })
 
-export const deletePost = (id, history) => ([
-    {
-        type: DELETE_POST,
-        payload: { id }
-    },
-    history.push('/')
-])
+export const deletePost = (id, history) => {
+    return dispatch => {
+        axios
+            .delete(`${URL}/posts/${id}`)
+            .then(resp => {
+                return dispatch([
+                    getAllPosts(history)
+                ])
+            })
+            .catch(error => {
+                return dispatch({
+                    type: DELETE_POST
+                })
+            });
+    }
+}

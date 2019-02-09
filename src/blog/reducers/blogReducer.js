@@ -14,6 +14,8 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
                     [action.payload.name]: action.payload.value
                 }
             };
+
+        case DELETE_POST:
         case SAVE_POST:
 
             if(action.payload === undefined){
@@ -46,11 +48,11 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
                 }
             }
 
-        case DELETE_POST:
+        // case DELETE_POST:
 
-            console.log(action.payload.id)
-            console.log(state)
-            console.log(state.posts)
+        //     console.log(action.payload.id)
+        //     console.log(state)
+        //     console.log(state.posts)
 
 
             // let teste = state.posts.reduce(function (Acumulador, valorAtual) {
@@ -72,15 +74,15 @@ export const blogReducer = (state = INITIAL_STATE, action) => {
 
             // console.log(teste)
 
-            return {
-                ...state,
-                posts: [
-                    ...state.posts.filter(post => {
-                        return post._id !== action.payload.id;
-                    })
-                ],
-                tempPost: { ...INITIAL_TEMP_STATE }
-            }
+            // return {
+            //     ...state,
+            //     posts: [
+            //         ...state.posts.filter(post => {
+            //             return post._id !== action.payload.id;
+            //         })
+            //     ],
+            //     tempPost: { ...INITIAL_TEMP_STATE }
+            // }
 
         // return state;
 
