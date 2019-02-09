@@ -6,6 +6,9 @@ import { Provider } from 'react-redux'
 import App from './main/App'
 
 import multi from 'redux-multi'
+import promise from 'redux-promise'
+import thunk from 'redux-thunk'
+
 
 import './assets/css/bootstrap.scss'
 import './assets/js/bootstrap'
@@ -15,7 +18,7 @@ const reducers = combineReducers({
     blog: blogReducer
 })
 
-const store = applyMiddleware(multi)(createStore)(reducers)
+const store = applyMiddleware(promise, multi, thunk)(createStore)(reducers)
 
 ReactDom.render(
     <Provider store={store}>

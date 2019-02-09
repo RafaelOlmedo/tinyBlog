@@ -7,7 +7,7 @@ import { TAGS } from '../data/tags';
 
 const BlogForm = (props) => (
     <div> {/* div do Form */}
-        <h2><p>{props.tempPost.id === 0 ? 'New' : 'Edit'} post</p></h2>
+        <h2><p>{props.tempPost._id === 0 ? 'New' : 'Edit'} post</p></h2>
 
         <div className="form-group">
             <label htmlFor="title">Title</label>
@@ -61,7 +61,7 @@ const BlogForm = (props) => (
 
         <div>
             <button className="btn btn-primary"
-                onClick={props.onSaveClick}>Save</button>
+                onClick={() => props.onSaveClick(props.tempPost)}>Save</button>
             {' '}
             <button className="btn btn-secondary" onClick={() => {props.history.push('/')}}>Cancel</button>
 
@@ -83,8 +83,8 @@ const mapDispatchToProps = (dispatch) => {
         onFieldChange: (event) => dispatch(
             fieldChange(event)
         ),
-        onSaveClick: () => dispatch(
-            savePost()
+        onSaveClick: (tempPost) => dispatch(
+            savePost(tempPost)
         )
     }
 }

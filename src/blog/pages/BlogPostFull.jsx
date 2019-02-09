@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const BlogPostFull = ({ id, posts, onDeleteClick, onEditClick, history }) => {
 
-    const post = posts.find(post => post.id === id);
+    const post = posts.find(post => post._id === id);
     console.log(id)
 
     if (post === undefined) {
@@ -31,7 +31,7 @@ const BlogPostFull = ({ id, posts, onDeleteClick, onEditClick, history }) => {
 
             <a href="/"
                 onClick={(e) => 
-                    onDeleteClick(e, post.id, history)}>[delete]</a>
+                    onDeleteClick(e, post._id, history)}>[delete]</a>
             {/* <a onClick={(e) => onDeleteClick(e, post.id)}>[delete]</a> */}
 
 
