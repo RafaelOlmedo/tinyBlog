@@ -73,7 +73,7 @@ export const savePost = (tempPost) => {
 //     }
 // }
 
-const getAllPosts = (history = null) => {
+export const getAllPosts = (history = null) => {
     return dispatch => {
         axios.get(`${URL}/posts`)
             .then(resp => {
